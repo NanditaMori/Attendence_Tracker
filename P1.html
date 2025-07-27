@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Students' attendance tracker</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+      crossorigin="anonymous"
+    />
+    <style>
+      .container-lg {
+        padding-bottom: 50px;
+        padding-top: 50px;
+      }
+      h1{
+        font-weight: 700;
+        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container-lg mt-5 mb-5">
+      <h1 class=" text-center text-dark">
+        STUDENTS'  ATTENDANCE TRACKER
+      </h1>
+
+      <div class="row mt-5">
+        <div class="col">
+          <button class="btn btn-success" onclick="allPresent()">
+            All Present
+          </button>
+        </div>
+
+        <div class="col">
+          <button class="btn btn-danger" onclick="allAbsent()">
+            All Absent
+          </button>
+        </div>
+
+        <div class="col">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1 "
+              >Total Present</span
+            >
+            <input type="text"class="form-control"aria-label="Username"aria-describedby="basic-addon1"id="totalPresent"
+            />
+          </div>
+        </div>
+
+        <div class="col">
+          <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1"
+              >Total Absent</span
+            >
+            <input type="text"class="form-control"aria-label="Username"aria-describedby="basic-addon1" id="totalAbsent"/>
+          </div>
+        </div>
+      </div>
+
+      <table
+        class="table table-striped table-hover mt-5 table-bordered text-center"
+        id="Datatable"
+      >
+        <thead>
+          <tr>
+            <th class="col-1">Roll no</th>
+            <th class="col-3">Name</th>
+            <th class="col-4"></th>
+            <th class="col-4"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <script>
+            student = [
+              { name: "Jiya Kyada", rollNo: 101 },
+              { name: "Shah Dhvani Hitesh", rollNo: 102 },
+              { name: "Saraya Mohit Haresh", rollNo: 103 },
+              { name: "Zalavadiya Heet Siddharth", rollNo: 104 },
+              { name: "Darshil Dobariya", rollNo: 105 },
+              { name: "Nafisa Gandhi", rollNo: 106 },
+              { name: "Vasani Yashvi Niteshbhai", rollNo: 107 },
+              { name: "Delvadiya Manavkumar Kirtibhai", rollNo: 108 },
+              { name: "Ashara Palak Gopalbhai", rollNo: 109 },
+              { name: "Lunagariya Greshi Kamleshbhai", rollNo: 110 },
+              { name: "Nanavati Shrushti Gargesh", rollNo: 111 },
+              { name: "Ranpara Jay Manishbhai", rollNo: 112 },
+              { name: "Disha Mehta", rollNo: 113 },
+              { name: "Thummar Niraj Bhaveshbhai", rollNo: 114 },
+              { name: "Kachhava Nakul Umeshbhai", rollNo: 115 },
+              { name: "Kanabar Urva Darshanbhai", rollNo: 116 },
+              { name: "Nakar Dhruvil Hitesh", rollNo: 117 },
+              { name: "Poshiya Priyanshi Ajaybhai", rollNo: 118 },
+              { name: "Baravalia Dharitri Manharbhai", rollNo: 119 },
+              { name: "Muchhara Kashish Hiteshbhai", rollNo: 120 },
+              { name: "Chauhan Aditya Sureshbhai", rollNo: 121 },
+              { name: "Harsora Sakshi Ajaybhai", rollNo: 122 },
+              { name: "Katrodiya Sahil Rajeshbhai", rollNo: 123 },
+              { name: "Trambadiya Parikshit Parimalbhai", rollNo: 124 },
+              { name: "Padariya Preya Parasbhai", rollNo: 125 },
+              { name: "Gambhava Krushiben Manojbhai", rollNo: 126 },
+              { name: "Jadeja Vishwrajsinh Krushnasinh", rollNo: 127 },
+              { name: "Patel Jiya Sandipbhai", rollNo: 128 },
+              { name: "Pipalava Smit Ashvinbhai", rollNo: 129 },
+              { name: "Gohil Harshrajsinh Jitendrasinh", rollNo: 130 },
+              { name: "Kathiriya Arshi Keshubhai", rollNo: 131 },
+              { name: "Undhad Vishwa Rajesh", rollNo: 132 },
+              { name: "Diya Raiyani", rollNo: 133 },
+              { name: "Chavda Maulik Vinodbhai", rollNo: 134 },
+              { name: "Chavda Priyanka Prabodhbhai", rollNo: 135 },
+              { name: "Chavda Virendrasinh Ashwinbhai", rollNo: 136 },
+              { name: "Galani Krunal Chetanbhai", rollNo: 137 },
+              { name: "Kavar Suchi Vasantbhai", rollNo: 138 },
+              { name: "Odedara Nilesh Parbat", rollNo: 139 },
+              { name: "Vasani Dishita Nikhilkumar", rollNo: 140 },
+              { name: "Vachhani Vaishvi Manojkumar", rollNo: 141 },
+              { name: "Bhadania Ronit Yatinbhai", rollNo: 142 },
+              { name: "Chauhan Jenil Virenbhai", rollNo: 143 },
+              { name: "Virpara Krisha Rajeshbhai", rollNo: 144 },
+              { name: "Chandra Darshit Hiteshbhai", rollNo: 145 },
+              { name: "Detroja Ruchit Arvindbhai", rollNo: 146 },
+              { name: "Kapuriya Hepin Pravinbhai", rollNo: 147 },
+              { name: "Gohel Smit Ashvinbhai", rollNo: 148 },
+              { name: "Patel Kirtan Amitbhai", rollNo: 149 },
+              { name: "Ginoya Deep Kantilal", rollNo: 150 },
+              { name: "Marvaniya Jainish Dharmendrabhai", rollNo: 151 },
+              { name: "Ajudiya Yash Nareshbhai", rollNo: 152 },
+              { name: "Manas Borisagar", rollNo: 153 },
+              { name: "Joshi Soham Kamleshbhai", rollNo: 154 },
+              { name: "Kakadiya Khilan Manishbhai", rollNo: 155 },
+              { name: "Sidhdhapura Dhaval Dharmeshbhai", rollNo: 156 },
+              { name: "Sitapara Aryan Sunilbhai", rollNo: 157 },
+              { name: "Bhatasana Nainshi Pareshbhai", rollNo: 158 },
+              { name: "Malvaniya Viraj Jatinbhai", rollNo: 159 },
+              { name: "Tanisha Pambhar", rollNo: 160 },
+              { name: "Padshala Kuldeep Rajendrakumar", rollNo: 161 },
+              { name: "Bhimani Vishva Manishbhai", rollNo: 162 },
+              { name: "Karan Anushka Pintubhai", rollNo: 163 },
+              { name: "Vyas Kavya Sachin", rollNo: 164 },
+              { name: "Kamani Purna Hareshbhai", rollNo: 165 },
+              { name: "Mori Nandita Renishkumar", rollNo: 166 },
+              { name: "Ratanghayra Pankti Himanshu", rollNo: 167 },
+              { name: "Rupala Nikhil Kashmeeraben", rollNo: 168 },
+              { name: "Jadeja Shivrajsinh Girirajsinh", rollNo: 169 },
+              { name: "Hirva Satani", rollNo: 170 },
+              { name: "Raiyani Jenil Sanjaybhai", rollNo: 171 },
+              { name: "Chandpa Prince Sureshbhai", rollNo: 172 },
+              { name: "Faldu Vrajesh Sanjaybhai", rollNo: 173 },
+              { name: "Khambholiya Manya Parasharbhai", rollNo: 174 },
+              { name: "Prajapati Kaivalya Samir", rollNo: 175 },
+              { name: "Moral Aadit Shaileshbhai", rollNo: 176 },
+              { name: "Shihora Vibhu Chetanbhai", rollNo: 177 },
+              { name: "Kanani Kruti Jayeshbhai", rollNo: 178 },
+              { name: "Karoliya Princekumar Sandipbhai", rollNo: 179 },
+              { name: "Khunt Rutvi Hiteshbhai", rollNo: 180 },
+              { name: "Charadva Abhishek Virenbhai", rollNo: 181 },
+              { name: "Dave Krisha Kalpeshbhai", rollNo: 182 },
+              { name: "Janvi Kalaria", rollNo: 183 },
+              { name: "Rajwani Rohan Malik", rollNo: 184 },
+              { name: "Rana Parthrajsinh Bhupatsinh", rollNo: 185 },
+              { name: "Solanki Ronak Arvindbhai", rollNo: 186 },
+              { name: "Panchal Vedantkumar Niravbhai", rollNo: 187 },
+              { name: "Ambasana Venisha Hitenbhai", rollNo: 188 },
+              { name: "Raichura Smeet Rohitkumar", rollNo: 189 },
+              { name: "Gambhava Mirali Sureshbhai", rollNo: 190 },
+              { name: "Dave Dhruv Viralkumar", rollNo: 191 },
+              { name: "Ghetiya Ritu Pankajbhai", rollNo: 192 },
+              { name: "Radhanpara Saumya Jatinbhai", rollNo: 193 },
+              { name: "Yadav Gaurav Kaushikbhai", rollNo: 194 },
+              { name: "Buddhadev Misri Sanjaybhai", rollNo: 195 },
+              { name: "Joshi Kairav Paren", rollNo: 196 },
+              { name: "Savaliya Dhruvi Bharatbhai", rollNo: 197 },
+              { name: "Radhanpura Jeel Nimish", rollNo: 198 },
+              { name: "Savaliya Priyanshi Sureshbhai", rollNo: 199 },
+              { name: "Zala Bhavyadeepsinh Pruthvirajsinh", rollNo: 200 },
+              { name: "Sinha Milankumar Sujitkumar", rollNo: 201 },
+              { name: "Lakhtaria Kevin Homin", rollNo: 202 },
+              { name: "Moliya Kartavya Bhaveshbhai", rollNo: 203 },
+              { name: "Monpara Nij Hareshbhai", rollNo: 204 },
+              { name: "Divya Thakar", rollNo: 205 },
+              { name: "Mendapara Piyu Amishbhai", rollNo: 206 },
+              { name: "Pandya Karan Tusharbhai", rollNo: 207 },
+              { name: "Raval Meet Mohitkumar", rollNo: 208 },
+              { name: "Virpariya Heer Manishbhai", rollNo: 209 },
+              { name: "Bhanushali Hiral Bhaven", rollNo: 210 },
+              { name: "Kamaliya Akashkumar Rameshbhai", rollNo: 211 },
+              { name: "Popat Honey Nileshbhai", rollNo: 212 },
+              { name: "Badrakiya Meet Bharatbhai", rollNo: 213 },
+              { name: "Kanani Kavit Nareshbhai", rollNo: 214 },
+              { name: "Ambaliya Manan Jayeshbhai", rollNo: 215 },
+              { name: "Hinsu Umang Bharatbhai", rollNo: 216 },
+              { name: "Kakaniya Bhavy Niteshbhai", rollNo: 217 },
+              { name: "Padia Kartik Balkrishna", rollNo: 218 },
+              { name: "Mankada Hasan Shabbirhusain", rollNo: 219 },
+              { name: "Mehta Dhairy Kalpeshbhai", rollNo: 220 },
+              { name: "Mehta Het Lalitkumar", rollNo: 221 },
+              { name: "Kahan Sanghani", rollNo: 222 },
+              { name: "Gotani Himesh Sanjaybhai", rollNo: 223 },
+              { name: "Narola Yash Nileshbhai", rollNo: 224 },
+              { name: "Targata Dharmishtha Arjanbhai", rollNo: 225 },
+              { name: "Bhuva Tirth Shaileshbhai", rollNo: 226 },
+              { name: "Jadeja Yashraj Lakhdhirsinh", rollNo: 227 },
+              { name: "Krisha Pujara", rollNo: 228 },
+              { name: "Varsani Ritul Hirji", rollNo: 229 },
+              { name: "Parmar Dhyey Dharmendra", rollNo: 230 },
+              { name: "Shingala Mansi Rajeshbhai", rollNo: 231 },
+              { name: "Dobariya Jeel Upendrabhai", rollNo: 232 },
+              { name: "Khant Mannkumar Jigneshbhai", rollNo: 233 },
+              { name: "Yadav Neel Hiteshbhai", rollNo: 234 },
+              { name: "Andodariya Yash Maheshbhai", rollNo: 235 },
+              { name: "Hirani Jeelkumar Sanjaybhai", rollNo: 236 },
+              { name: "Mankad Shyamsundar Mitbhai", rollNo: 237 },
+              { name: "Agavan Rohan Farukbhai", rollNo: 238 },
+              { name: "Bhadja Zeel Satishkumar", rollNo: 239 },
+              { name: "Shreya Vijaybhai Bhundia", rollNo: 240 },
+              { name: "Aghara Keyur Hiteshbhai", rollNo: 241 },
+              { name: "Buddhadev Deep Nitinbhai", rollNo: 242 },
+              { name: "Godham Meet Maheshbhai", rollNo: 243 },
+              { name: "Katariya Trisha Ashvinbhai", rollNo: 244 },
+              { name: "Vekariya Jay Bipinbhai", rollNo: 245 },
+              { name: "Rutvi Gautami", rollNo: 246 },
+              { name: "Sankaliya Aryan Ashokbhai", rollNo: 247 },
+              { name: "Ghadiya Yashvi Sanjaybhai", rollNo: 248 },
+              { name: "Ved Chatvani", rollNo: 249 },
+              { name: "Ghorai Swati Sanjib", rollNo: 250 },
+              { name: "Karena Radhika Bharatbhai", rollNo: 251 },
+              { name: "Pandya Kruti Tusharbhai", rollNo: 252 },
+              { name: "Patel Tejkumar Niteshbhai", rollNo: 253 },
+              { name: "Sagpariya Mahee Nitinbhai", rollNo: 254 },
+              { name: "Sherasiya Shyam Sureshbhai", rollNo: 255 },
+              { name: "Liya Hirvita Rajendra", rollNo: 256 },
+              { name: "Ahir Krishna Manishbhai", rollNo: 257 },
+              { name: "Parmar Devanshu Gopalbhai", rollNo: 258 },
+              { name: "Tivari Astha Sureshbhai", rollNo: 259 },
+              { name: "Pal Kana Odedra", rollNo: 260 },
+              { name: "Sorathiya Nabhag Sanjaybhai", rollNo: 261 },
+              { name: "Chauhan Vishal Girishbhai", rollNo: 262 },
+              { name: "Kuchhadiya Vanita Bhima", rollNo: 263 },
+              { name: "Bhimani Naman Chiragbhai", rollNo: 264 },
+              { name: "Diyora Miraj Bhaveshbhai", rollNo: 265 },
+              { name: "Gajera Rakshit Ketanbhai", rollNo: 266 },
+              { name: "Parmar Darpan Jitendra", rollNo: 267 },
+              { name: "Trivedi Manan Vijaykumar", rollNo: 268 },
+              { name: "Dave Maharshi Kirtikumar", rollNo: 269 },
+              { name: "Param Rameshbhai Kotadiya", rollNo: 270 },
+              { name: "Patel Archi Pradipbhai", rollNo: 271 },
+              { name: "Saradhara Yug Vrajbhushanbhai", rollNo: 272 },
+              { name: "Padhariya Ruturajsinh Sureshbhai", rollNo: 273 },
+              { name: "Vegad Jenil Ashokbhai", rollNo: 274 },
+              { name: "Patani Kismatbanu Shahidbhai", rollNo: 275 },
+              { name: "Savaliya Jinesh Kantilal", rollNo: 276 },
+              { name: "Tank Darshan Chetanbhai", rollNo: 277 },
+              { name: "Ghodasara Dev Ketanbhai", rollNo: 278 },
+              { name: "Pithadiya Yash Devendrabhai", rollNo: 279 },
+              { name: "Gohel Jenil Amitkumar", rollNo: 280 },
+            ];
+
+            for (i = 0; i < student.length; i++) {
+              document.write("<tr>");
+              document.write("<td>" + student[i].rollNo + "</td>");
+              document.write("<td>" + student[i].name + "</td>");
+              document.write("<td id='status" + i + "' >Not Marked</td>");
+              document.write(
+                "<td><button id='demo" + i +"' class='btn btn-success' onclick='markPresent("+i+")' >Present</button> <button id='demo1" + i +"' class='btn btn-danger'onclick='markAbsent(" + i + ")'>Absent</button></td> ");
+              document.write("</tr>");
+            }
+
+            present = 0;
+
+            function markPresent(i) {
+              
+              statusRef = document.getElementById("status" + i);
+
+              student[i].status = "Present";
+              statusRef.innerHTML = student[i].status;
+
+              updateCount ();
+            }
+
+            function markAbsent(i) {
+              statusRef = document.getElementById("status" + i);
+              student[i].status = "Absent";
+              statusRef.innerHTML = student[i].status;
+
+              updateCount();
+            }
+
+            function allPresent() {
+              for (let i = 0; i < student.length; i++) {
+                student[i].status = "Present";
+                document.getElementById("status" + i).innerHTML = "Present";
+              }
+                updateCount();
+            }
+
+            function allAbsent() {
+              for (let i = 0; i < student.length; i++) {
+                student[i].status = "Absent";
+                document.getElementById("status" + i).innerHTML = "Absent";
+              }
+              updateCount();
+            }
+
+              function updateCount() {
+                const presentCount = student.filter(s => s.status === "Present").length;
+                const absentStudents = student.filter(s => s.status === "Absent");
+
+                document.getElementById("totalPresent").value = presentCount;
+                document.getElementById("totalAbsent").value = absentStudents.length;
+
+                const absentRolls = absentStudents.map(s => s.rollNo).join(", ");
+                document.getElementById("absentList").innerText = absentRolls || "None";
+              }
+
+          </script>
+        </tbody>
+      </table>
+
+      <div class="mt-4" style="color: red;">
+        <h5>Absent Roll Numbers:</h5>
+        <p id="absentList" class="text-danger fw-bold"></p>
+      </div>
+
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
